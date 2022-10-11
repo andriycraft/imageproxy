@@ -15,6 +15,7 @@ $context = stream_context_create($opts);
 
 if(!$url){
 	header('HTTP/1.1 400 Bad Request');
+	echo 'No URL!';
 	die;
 }
 
@@ -32,6 +33,7 @@ try {
 	$mime = getUrlMimeType($url, false, $context);
 } catch (Exception $e) {
 	header('HTTP/1.1 403 Forbidden');
+	echo 'Bad status code!';
 	die;
 }
 
@@ -44,3 +46,6 @@ foreach ($mimetypes as $mimetype) {
 		}
 	}
 } 
+
+header('HTTP/1.1 502 Bad gateway');
+echo 'Bad gateway';
