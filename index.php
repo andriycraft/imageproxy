@@ -5,6 +5,11 @@ $current = file_get_contents($file);
 $s = $current . "\r\n" . 'Req: ' . $_SERVER['REMOTE_ADDR'] . ' ' . $_SERVER['REQUEST_URI'];
 file_put_contents($file, $s);
 
+if(isset($url)){
+	header('HTTP/1.1 400 Bad Request');
+	die;
+}
+
 $d = hex2bin($url);
 function getUrlMimeType($url) {
     $buffer = file_get_contents($url);
@@ -21,12 +26,6 @@ $opts = array(
 );
 
 $context = stream_context_create($opts);
-
-
-if(isset($url)){
-	header('HTTP/1.1 400 Bad Request');
-	die;
-}
 
 date_default_timezone_set('Europe/Berlin'); // Change this to your own timezone
 $current_date = date('H:i:s - d/m/Y');
