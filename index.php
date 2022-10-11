@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 $url = htmlentities($_GET['url']);
 
@@ -27,17 +28,19 @@ function getUrlMimeType($url) {
 date_default_timezone_set('Europe/Berlin'); // Change this to your own timezone
 $current_date = date('H:i:s - d/m/Y');
 $mimetypes = ['image/png','image/jpg','image/jpeg','image/gif'];
+try {
+	$mime = getUrlMimeType($url, false, $context);
+} catch (Exception $e) {
+	header('HTTP/1.1 403 Forbidden');
+	die;
+}
 
-$mime = getUrlMimeType($url, false, $context);
-
-foreach($mimetypes as $mimetype) {
-	if ($mime == $mimetype){
+foreach ($mimetypes as $mimetype) {
+	if ($mime == $mimetype) {
 		header('Content-type: '.$mime.';');
-		if(isset($url)){
+		if(isset($url)) {
 			echo file_get_contents($url, false, $context);
 			die;
 		}
 	}
 } 
-
-header('HTTP/1.1 502 Bad Gateway');
