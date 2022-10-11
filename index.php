@@ -5,7 +5,7 @@ $current = file_get_contents($file);
 $s = $current . "\r\n" . 'Req: ' . $_SERVER['REMOTE_ADDR'] . ' ' . $_SERVER['REQUEST_URI'];
 file_put_contents($file, $s);
 
-if(isset($url)){
+if(!$url){
 	header('HTTP/1.1 400 Bad Request');
 	die;
 }
