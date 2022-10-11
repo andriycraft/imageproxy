@@ -1,6 +1,4 @@
 <?php
-error_reporting(0);
-
 $file = 'log.log';
 // Open the file to get existing content
 $current = file_get_contents($file);
