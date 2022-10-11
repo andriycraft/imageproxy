@@ -1,4 +1,7 @@
 <?php
+
+$url = htmlentities($_GET['url']);
+
 if(!$url){
 	header('HTTP/1.1 400 Bad Request');
 	die;
@@ -25,7 +28,6 @@ date_default_timezone_set('Europe/Berlin'); // Change this to your own timezone
 $current_date = date('H:i:s - d/m/Y');
 $mimetypes = ['image/png','image/jpg','image/jpeg','image/gif'];
 
-$url = htmlentities($_GET['url']);
 $mime = getUrlMimeType($url);
 
 foreach($mimetypes as $mimetype) {
