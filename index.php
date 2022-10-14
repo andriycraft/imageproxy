@@ -2,6 +2,7 @@
 error_reporting(0);
 
 $url = htmlentities($_GET['url']);
+$current = '';
 
 $opts = array(
   'http'=>array(
