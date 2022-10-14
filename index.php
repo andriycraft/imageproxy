@@ -11,11 +11,10 @@ $opts = array(
   )
 );
 
-$file = 'log.log';
 if (str_contains($_SERVER['REMOTE_ADDR'], '10.10.10.') {
 	$_SERVER['REMOTE_ADDR'] = $_SERVER['X_FORWARDED_FOR']
 }
-$current = file_get_contents($file);
+$current = file_get_contents('log.log');
 $s = $current . "\r\n" . 'Request from: ' . $_SERVER['REMOTE_ADDR'] . ' to URL ' . $_SERVER['REQUEST_URI'] . ' (user agent: ' . $_SERVER['USER-AGENT'] . ')';
 file_put_contents($file, $s);
 
